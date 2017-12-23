@@ -1,0 +1,60 @@
+body{
+	background-color: #f4f4f4;
+	color:#000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:normal;
+	/* Same as above
+	font: normal  16px Arial, Helvetica, sans-serif;*/
+
+	line-height: 1.6em;
+}
+
+.container{
+	margin:10px;
+	/*
+	- width is the width of the container
+	- margin auto creates an equal spacing around an element
+	- width as a set pixels doesn't respond well when the size of the screen changes; so use a % instead ie 50%
+	*/
+}
+
+.newFlyers{
+	margin-bottom: 20px;
+}
+
+
+.newFlyers h1{
+	text-decoration: underline;
+}
+
+.newFlyers p{
+	font-size: 175%;
+	font-weight: bold;
+}
+
+.flyerHomepage h1{
+	text-decoration: underline;
+}
+
+.flyerHomepage p{
+	font-size: 175%;
+	font-weight: bold;
+}
+
+a{
+	text-decoration: none; (gets rid of underline)
+	color:#000; makes it black
+}
+
+a:hover{
+	color:red; changes the hovering color to red
+}
+
+a:active{
+	color:green; changes to green when clicked on
+}
+
+a:visited{
+	color:red; changes to yellow when visited
+}
