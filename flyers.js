@@ -1,3 +1,5 @@
+// Last edited on December 30th (editing the code to work for old and new months)
+
 $(document).ready(function(){
 	// Declarations to get the current date
 	var today = new Date();
@@ -22,6 +24,11 @@ $(document).ready(function(){
 							'September', 'October','November', 'December')
 	var currMonth = month[mm-1];
 	var currMonthLowerCase = currMonth.toLowerCase();
+	var nextMonth = month[mm%12];
+	var nextMonthLowerCase = nextMonth.toLowerCase();
+	// console.log(nextMonth);
+	// console.log(nextMonthLowerCase);
+
 	var dayOfWeek = weekday[today.getDay()];
 
 	// alert(dayOfWeek); // Wow you really get the day of the week
@@ -109,6 +116,7 @@ $(document).ready(function(){
 	// Start and end date for flyers
 	var startDate = updateStartDate();
 	var endDate = startDate + 6;
+	var checkIfNextMonth = endDate;
 
 	if(endDate > currentMonthDays){
 		endDate = endDate%currentMonthDays;
@@ -122,40 +130,75 @@ $(document).ready(function(){
 	var startDateWalmartString = (startDate-1).toString(); 
 	var endDateWalmartString = (endDate-1).toString();	
 
+	// Since Save-On and Price-Smart start 2 days earlier apparently..
+	var startDateSaveOnAndPriceSmart = (startDate-2).toString();
+
 	// Edit No Frills href
 	var noFrills = document.getElementById("nf");
 	var noFrillsLink = "https://flyers.smartcanucks.ca/canada/no-frills-west-flyer-" + 
 						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+
+	if(checkIfNextMonth > currentMonthDays){
+		noFrillsLink = "https://flyers.smartcanucks.ca/canada/no-frills-west-flyer-" + 
+				currMonthLowerCase + "-" + startDateString + "-to-" + nextMonthLowerCase +
+				"-" + endDateString;
+	}
 	noFrills.setAttribute("href", noFrillsLink);
 
 	// Edit Price Smart href
 	var priceSmart = document.getElementById("ps");
 	var priceSmartLink = "https://flyers.smartcanucks.ca/canada/pricesmart-foods-flyer-" +
-						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+						currMonthLowerCase + "-" + startDateSaveOnAndPriceSmart + "-to-" + endDateString;
+
+	if(checkIfNextMonth > currentMonthDays){
+		priceSmartLink = "https://flyers.smartcanucks.ca/canada/pricesmart-foods-flyer-" +
+						currMonthLowerCase + "-" + startDateSaveOnAndPriceSmart + "-to-" 
+						+ nextMonthLowerCase + "-" + endDateString;
+	}
 	priceSmart.setAttribute("href", priceSmartLink);
 
 	// Edit Real Canadian href
 	var realCanadian = document.getElementById("rcs");
 	var realCanadianLink = "https://flyers.smartcanucks.ca/canada/real-canadian-superstore-west-flyer-" +
 						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+	if(checkIfNextMonth > currentMonthDays){
+		realCanadianLink = "https://flyers.smartcanucks.ca/canada/real-canadian-superstore-west-flyer-" +
+						currMonthLowerCase + "-" + startDateString + "-to-" + nextMonthLowerCase
+						+ "-" + endDateString;
+	}
 	realCanadian.setAttribute("href", realCanadianLink);
 
 	// Edit SafeWay href
 	var safeway = document.getElementById("sw");
 	var safewayLink = "https://flyers.smartcanucks.ca/canada/safeway-bc-flyer-" +
 						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+	if(checkIfNextMonth > currentMonthDays){
+		safewayLink = "https://flyers.smartcanucks.ca/canada/safeway-bc-flyer-" +
+						currMonthLowerCase + "-" + startDateString + "-to-" + nextMonthLowerCase +
+						"-" + endDateString;
+	}
 	safeway.setAttribute("href", safewayLink);
 
 	// Edit Save On href
 	var saveOn = document.getElementById("sof");
 	var saveOnLink = "https://flyers.smartcanucks.ca/canada/save-on-foods-bc-flyer-" +
-						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+						currMonthLowerCase + "-" + startDateSaveOnAndPriceSmart + "-to-" + endDateString;
+	if(checkIfNextMonth > currentMonthDays){
+		saveOnLink = "https://flyers.smartcanucks.ca/canada/save-on-foods-bc-flyer-" +
+						currMonthLowerCase + "-" + startDateSaveOnAndPriceSmart + "-to-" 
+						+ nextMonthLowerCase + "-" + endDateString;
+	}
 	saveOn.setAttribute("href", saveOnLink);
 
 	// Edit T&T href
 	var TT = document.getElementById("tt");
 	var TTLink = "https://flyers.smartcanucks.ca/canada/tt-supermarket-bc-flyer-" +
 						currMonthLowerCase + "-" + startDateString + "-to-" + endDateString;
+	if(checkIfNextMonth > currentMonthDays){
+		TTLink = "https://flyers.smartcanucks.ca/canada/tt-supermarket-bc-flyer-" +
+						currMonthLowerCase + "-" + startDateString + "-to-" + nextMonthLowerCase +
+						"-" + endDateString;
+	}
 	TT.setAttribute("href", TTLink);
 
 	// Edit WalMart href
@@ -163,5 +206,10 @@ $(document).ready(function(){
 	var walmartLink = "https://flyers.smartcanucks.ca/canada/walmart-west-flyer-" +
 						currMonthLowerCase + "-" + startDateWalmartString + "-to-" + 
 						endDateWalmartString;
+	if(checkIfNextMonth > currentMonthDays){
+		walmartLink = "https://flyers.smartcanucks.ca/canada/walmart-west-flyer-" +
+						currMonthLowerCase + "-" + startDateWalmartString + "-to-" + 
+						nextMonthLowerCase + "-" + endDateWalmartString;
+	}
 	walmart.setAttribute("href", walmartLink);
 })
